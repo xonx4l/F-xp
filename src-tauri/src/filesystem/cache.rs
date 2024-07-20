@@ -34,4 +34,16 @@ impl FsEventHandler {
         }
     }
 
+         fn get_from_cache<'a>(&self , state: & 'a mut AppState )-> & 'a mut VolumeCache {
+           let mountpoint = self.mountpoint.to.string_lossy().to_string();
+
+             state.system_cache.get_mut(&mountpoint).unwrap_or_else( || {
+             panic!(
+                    "Failed to find mountpoint '{:?}' in cache.",
+                     self.mountpoint
+             )
+        })
+
+    }
+
 }
