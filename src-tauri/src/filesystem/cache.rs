@@ -20,3 +20,18 @@ lazy_static! {
     };
 }
 
+/// Handles filesystem events, currently intended for cahche invalidation.
+pub struct FsEventHandler {
+    state_mux: StateSafe,
+    mountpoint: Pathbuf,
+}
+
+impl FsEventHandler {
+     pub fn new (state_mux: StateSafe, Mountpoint: PathBuf) -> Self {
+          Self {
+              state_mux,
+              mountpoint,
+        }
+    }
+
+}
