@@ -44,6 +44,12 @@ impl FsEventHandler {
              )
         })
 
+    
+    }
+
+    pub fn handle_create(&self , kind: CreateKind, path:&Path) {
+        let state = &mut self.state_mux.lock().unwrap();
+        let current_volume = self.get_from_cache(state);
     }
 
 }
