@@ -74,4 +74,23 @@ impl FsEventHandler {
         current_volume.remove(&filename);
     }
 
+    pub fn handle_rename_from(&mut self , old_path: &path) {
+        let state = &mut self.state_mux.lock().unwrap();
+        let current_volume = self.get_from_cache(state);
+
+        let old_path_string = old_path.to_string_lossy().to_string();
+        let old_filename = old_path.file_name().unwrap().to_string_lossy().to_string();
+
+        let empty_vec = &mut Vec::new();
+        let cached_paths = current_volume.get_mut(&old_filename).unwrap_or(empty_vec);
+
+
+        if cached_paths.len() <= 1 {
+            current_volume.remove(&old_filename);
+            return;
+        }
+
+        cached_path.retain(|path| path.file_path != old_path_string);
+    }
+
 }
