@@ -50,6 +50,28 @@ impl FsEventHandler {
     pub fn handle_create(&self , kind: CreateKind, path:&Path) {
         let state = &mut self.state_mux.lock().unwrap();
         let current_volume = self.get_from_cache(state);
+
+        let filename = path.file_name().unwrap().to_string_lossy().to_string();
+        let file_type = match kind {
+            CreateKind::File => FILE,
+            CreateKind::Folder => DIRECTORY,
+            _=> return,
+        }
+            .to_string();
+
+        let file_path = path.to_string_lossy().to_string();
+        current_volume.entry(filename).or_insert_with(|| vec![CachedPath {
+            file_path,
+            file_type,
+            }]);
+    }
+
+    pub fn handle_delete(&self, path: &Path) {
+        let state = &mut self.state_mux.lock().unwrap();
+        let current_volume = self.get_from_cache(state);
+
+        let filename = path.file_name().unwrap().to_string_lossy().to_string();
+        current_volume.remove(&filename);
     }
 
 }
