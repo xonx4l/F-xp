@@ -93,4 +93,18 @@ impl FsEventHandler {
         cached_path.retain(|path| path.file_path != old_path_string);
     }
 
+    pub fn handle_renmae_to(&mut self, new_path:&Path ) {
+        let state = &mut self.state.mux.lock().unwrap();
+        let current_volume = self.get_from_cache(state);
+
+        let filename = new_path.file_name().unwrap().to_string_lossy().to_string();
+        let file_type = if new_path.is_dir() { DIRECTORY } else {FILE};
+
+        let path_string = new_path.to_string_lossy().to_string();
+        current_volume.entry(filename).or_insert_with(|| vec![cachedPath{
+            file_path: path_string,
+            file_type: string::from(file_type),
+            }]);
+    }
+
 }
