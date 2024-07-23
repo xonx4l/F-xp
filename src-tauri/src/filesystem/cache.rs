@@ -107,4 +107,13 @@ impl FsEventHandler {
             }]);
     }
 
+    pub fn handle_event(&mut self, event:Event) {
+        let paths = event.paths;
+
+        match event.kind {
+              
+
+        }
+
+    }
 }
