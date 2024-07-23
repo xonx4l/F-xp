@@ -111,6 +111,9 @@ impl FsEventHandler {
         let paths = event.paths;
 
         match event.kind {
+            notify::EventKind::Modify(modify_kind) => {
+                
+            }
               
 
         }
