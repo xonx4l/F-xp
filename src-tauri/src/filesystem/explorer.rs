@@ -1,11 +1,11 @@
 pub fn search() {
-    // search logic here 
+    // search logic here
 }
 
 pub fn item_found() {
-    // item_found logic here 
+    // item_found logic here
 }
 
 pub fn item_not_found() {
-    // item_not_found logic here 
+    // item_not_found logic here
 }

@@ -1,7 +1,13 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
-
+use serde::{Deserialize, Serialize};
 fn main() {
+
+    #[derive(Serialize, Deserialize)]
+    pub struct CachedPath {
+        
+    }
+
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler!)
                get_volumes,
