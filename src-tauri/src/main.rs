@@ -11,6 +11,8 @@ fn main() {
         file_type: String,
     }
 
+    pub tupe VolumeCache = Hashmap<String, Vec<CachedPath>>;
+
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler!)
                get_volumes,
