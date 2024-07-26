@@ -5,7 +5,10 @@ fn main() {
 
     #[derive(Serialize, Deserialize)]
     pub struct CachedPath {
-        
+       #[serde(rename = "p")] 
+        file_path:String,
+        #[serde(rename = "t")]
+        file_type: String,
     }
 
     tauri::Builder::default()
